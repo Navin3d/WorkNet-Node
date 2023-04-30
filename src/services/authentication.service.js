@@ -1,3 +1,4 @@
+const { v4 } = require("uuid");
 const Employee = require("../models/Employee.model");
 const Employer = require("../models/Employer.model");
 class AuthenticationService {
@@ -48,6 +49,7 @@ class AuthenticationService {
         });
     }
     registerEmployer(data) {
+        data["user_id"] = v4();
         let newuser = new Employer(data);
         newuser.save()
             .then((data) => {
@@ -60,6 +62,7 @@ class AuthenticationService {
         return newuser;
     }
     registerEmployee(data) {
+        data["user_id"] = v4();
         let newuser = new Employee(data);
         newuser.save()
             .then((data) => {
